@@ -129,8 +129,8 @@ def create_atomdict():
     atom_list = atomdata.split(";")
     weight_dict = {}
     for atom in atom_list:
-        name, weight = atom.split()
-        weight_dict[name] = float(weight)
+        atom, weight = atom.split()
+        weight_dict[atom] = float(weight)
     
     return weight_dict
 
@@ -341,17 +341,33 @@ def get_word(que):
     return word
 
 def weight(mol, atom_dict):
-
-    if mol.atom.isalpha() and mol.next != None:
-        mol_weight = atom_dict(mol.atom) * mol.num + weight(mol.next, atom_dict)
-
-    elif mol.atom == "( )" and mol.next != None: 
-        mol_weight = weight(mol.down) * mol.num + weight(mol.down, atom_dict)
-
-    elif mol.atom.isalpha():
-        mol_weight = atom_dict(mol.atom) * mol.num
+    if mol.next != None:
+        if mol.atom == ("( )"):
+            print("1")
+            atom_weight = weight(mol.down, atom_dict) * mol.num + weight(mol.next, atom_dict)
+            return atom_weight
+        
+        else:
+            print("2")
+            atom_weight = atom_dict[mol.atom] * mol.num + weight(mol.next, atom_dict)
+            return atom_weight
     
-    return mol_weight
+    elif mol.down != None:
+        if mol.atom == ("( )"):
+            print("3")
+            atom_weight = weight(mol.down, atom_dict) * mol.num
+            return atom_weight
+
+        else: 
+            print("4")
+            atom_weight = atom_dict[mol.atom] * mol.num + weight(mol.down, atom_dict)
+            return atom_weight
+
+    else: 
+        print("5")
+        atom_weight = atom_dict[mol.atom] * mol.num
+
+    return atom_weight
 
 
 
