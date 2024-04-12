@@ -151,6 +151,12 @@ class Syntaxfel(Exception):
     pass
 
 def formula():
+    """
+    Runs program and draws graphics and calculates weight
+    Parameters: Nothing
+    Returns: Nothing
+    """
+
     if DEBUG:
         print("formula")
     
@@ -176,6 +182,12 @@ def formula():
                 print(returnvalue)
     
 def ismolecule(que):
+    """
+    Checks if molecule follows syntax for a molecule
+    Parameters: que with molecule letters
+    Returns: molecule graphics window object
+    """
+
     if DEBUG:
         print("ismolecule")
         print(que)
@@ -193,9 +205,10 @@ def ismolecule(que):
 def isgroup(que):
     """ 
     Function for testing if input follows syntax for a molecule
-    Parameters: text that could be a molecule
-    Returns: nothing
+    Parameters: que with molecule letters
+    Returns: molecule graphics window object
     """
+
     if DEBUG:
         print("isgroup")
         print(que)
@@ -239,6 +252,12 @@ def isgroup(que):
       
 
 def isatom(que):
+    """
+    Checks if molecule follows syntax for an atom
+    Parameters: que with molecule letters
+    Returns: molecule graphics window object
+    """
+
     if DEBUG:
         print("isatom")
 
@@ -275,6 +294,12 @@ def isatom(que):
         raise Syntaxfel(f"Saknad stor bokstav vid radslutet {word}")
     
 def isnum(que):
+    """
+    Checks if numbers follow correct syntax
+    Parameters: que with molecule numbers
+    Returns: numbers
+    """
+
     if DEBUG:
         print("isnum")
 
@@ -309,6 +334,7 @@ def isbigletter(value):
     Parameters: value to check
     Returns: True or False
     """
+
     if DEBUG:
         print("isbigletter")
 
@@ -333,6 +359,12 @@ def issmallletter(value):
         return False 
 
 def get_word(que):
+    """
+    Function that returns the remaining letters in the que as a word
+    Parameters: que
+    Returns: word
+    """
+
     word = ""
     if not que.isEmpty():
         while not que.isEmpty():
@@ -341,6 +373,12 @@ def get_word(que):
     return word
 
 def weight(mol, atom_dict):
+    """
+    Function that returns the weight of a molecule using recursion
+    Parameters: molecule squares, dictionary with atom weights
+    Returns: molecule weight
+    """
+
     if mol.next != None:
         if mol.atom == ("( )"):
             print("1")
